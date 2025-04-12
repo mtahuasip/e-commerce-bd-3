@@ -1,5 +1,11 @@
 from flask import Blueprint, render_template, redirect, flash
-from app.forms.auth_forms import RegisterForm
+from flask_login import login_user, login_required, logout_user, current_user
+from app.forms.auth_forms import (
+    RegisterForm,
+    LoginForm,
+    ProfileForm,
+    ChangePasswordForm,
+)
 from app.models.user import User
 
 auth = Blueprint("auth", __name__)
@@ -20,25 +26,83 @@ def register():
     return render_template("auth/register.html", show_sidebar=False, form=form)
 
 
-@auth.route("/login", methods=["GET"])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("auth/login.html", show_sidebar=False)
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user, message, category = User.find_user_by_email(form.email.data)
+
+        if not user:
+            flash(message, category)
+            form.data.clear()
+            return render_template("auth/login.html", show_sidebar=False, form=form)
+
+        message, category = user.verify_password(form.password.data)
+
+        if category == "success":
+            login_user(user)
+            flash(message, category)
+            form.data.clear()
+            return redirect("/products")
+        else:
+            flash(message, category)
+
+    return render_template("auth/login.html", show_sidebar=False, form=form)
 
 
-@auth.route("/change-password", methods=["GET"])
+@auth.route("/profile", methods=["GET", "POST"])
+@login_required
+def profile():
+    form = ProfileForm()
+
+    if form.validate_on_submit():
+        id = current_user.id
+        message, category = User.update(id, form.data)
+
+        if category == "success":
+            flash(message, category)
+            form.data.clear()
+            return redirect("/profile")
+        else:
+            flash(message, category)
+            form.data.clear()
+
+    return render_template(
+        "auth/profile.html",
+        show_sidebar=False,
+        active_page="profile",
+        form=form,
+    )
+
+
+@auth.route("/change-password", methods=["GET", "POST"])
+@login_required
 def change_password():
+    form = ChangePasswordForm()
+
+    if form.validate_on_submit():
+        id = current_user.id
+        message, category = User.update_password(id, form.data)
+
+        if category == "success":
+            flash(message, category)
+            form.data.clear()
+            return redirect("/change-password")
+        else:
+            flash(message, category)
+            form.data.clear()
+
     return render_template(
-        "auth/change_password.html", show_sidebar=False, active_page="change_password"
+        "auth/change_password.html",
+        show_sidebar=False,
+        active_page="change_password",
+        form=form,
     )
 
 
-@auth.route("/edit-profile", methods=["GET"])
-def edit_profile():
-    return render_template(
-        "auth/edit_profile.html", show_sidebar=False, active_page="edit_profile"
-    )
-
-
-@auth.route("/logout", methods=["GET"])
+@auth.route("/logout", methods=["GET", "POST"])
+@login_required
 def logout():
+    logout_user()
     return redirect("/login")

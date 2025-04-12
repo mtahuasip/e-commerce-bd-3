@@ -5,61 +5,54 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-        <form class="box">
+        <form class="box" method="POST">
+          {{ form.hidden_tag() }}
+
           <h1 class="title is-4 has-text-centered mb-5">
             <i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión
           </h1>
 
-          <!-- Correo -->
           <div class="field">
-            <label class="label">Correo electrónico</label>
+            <label class="label">{{ form.email.label }}</label>
             <div class="control has-icons-left">
-              <input
-                class="input"
-                type="email"
-                placeholder="ejemplo@correo.com"
-                required
-              />
+              {{ form.email (class="input", placeholder="ejemplo@correo.com",
+              required=True) }}
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
             </div>
           </div>
 
-          <!-- Contraseña -->
           <div class="field">
-            <label class="label">Contraseña</label>
+            <label class="label">{{ form.password.label }}</label>
             <div class="control has-icons-left">
-              <input
-                class="input"
-                type="password"
-                placeholder="••••••••"
-                required
-              />
+              {{ form.password (class="input", placeholder="••••••••",
+              required=True) }}
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
             </div>
           </div>
 
+          <!-- TODO: Agregar después -->
           <!-- Recordarme -->
-          <div class="field">
+          <!-- <div class="field">
             <label class="checkbox">
               <input type="checkbox" /> Recordarme
             </label>
-          </div>
+          </div> -->
 
-          <!-- Botón -->
           <div class="field">
             <button class="button is-primary is-fullwidth">
-              <i class="fas fa-sign-in-alt mr-2"></i> Entrar
+              <i class="fas fa-sign-in-alt mr-2"></i> {{ form.submit.label }}
             </button>
           </div>
 
-          <!-- Link de registro o recuperación -->
           <p class="has-text-centered is-size-7">
-            ¿No tienes cuenta? <a href="#">Regístrate</a><br />
-            <a href="#">¿Olvidaste tu contraseña?</a>
+            ¿No tienes cuenta?
+            <a href="{{ url_for('auth.register') }}">Regístrate</a><br />
+            <!-- TODO: Agregar después -->
+            <!-- <a href="#">¿Olvidaste tu contraseña?</a> -->
           </p>
         </form>
       </div>

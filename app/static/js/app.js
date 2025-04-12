@@ -1,3 +1,35 @@
+const TOAST_TIMEOUT = 5000;
+
+setTimeout(function () {
+  $(".flash-toast").remove();
+}, TOAST_TIMEOUT);
+
+function toggleEdit() {
+  $("#profile-form input").each(function () {
+    $(this).prop("readonly", !$(this).prop("readonly"));
+  });
+
+  $("#edit-btn").toggleClass("is-hidden");
+  $("#save-btn").toggleClass("is-hidden");
+}
+
+function updateTotal() {
+  let total = 0;
+  $("#cart-list .cart-item").each(function () {
+    const priceText = $(this)
+      .find(".subtitle")
+      .text()
+      .replace("$", "")
+      .replace(",", "");
+    const price = parseFloat(priceText);
+    const quantity = parseInt($(this).find(".quantity-input").val());
+    if (!isNaN(price) && !isNaN(quantity)) {
+      total += price * quantity;
+    }
+  });
+  $("#total-price").text("$" + total.toFixed(2));
+}
+
 $(document).ready(function () {
   $(".navbar-burger").on("click", function (e) {
     e.stopPropagation();
@@ -42,28 +74,6 @@ $(document).ready(function () {
     $(this).closest(".cart-item").remove();
     updateTotal();
   });
+
+  $("#save-btn").on("click", toggleEdit);
 });
-
-function updateTotal() {
-  let total = 0;
-  $("#cart-list .cart-item").each(function () {
-    const priceText = $(this)
-      .find(".subtitle")
-      .text()
-      .replace("$", "")
-      .replace(",", "");
-    const price = parseFloat(priceText);
-    const quantity = parseInt($(this).find(".quantity-input").val());
-    if (!isNaN(price) && !isNaN(quantity)) {
-      total += price * quantity;
-    }
-  });
-  $("#total-price").text("$" + total.toFixed(2));
-}
-
-const TOAST_TIMEOUT = 5000;
-
-setTimeout(() => {
-  const toasts = document.querySelectorAll(".flash-toast");
-  toasts.forEach((t) => t.remove());
-}, TOAST_TIMEOUT);

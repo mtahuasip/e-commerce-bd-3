@@ -1,0 +1,70 @@
+{% extends "layout/base.html" %} {% block title %}👤 Perfil{% endblock %} {%
+block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div
+        class="column is-5-tablet is-4-desktop is-4-widescreen has-text-centered"
+      >
+        <span class="icon is-large mb-4">
+          <i class="fas fa-user fa-6x has-text-grey-light"></i>
+        </span>
+
+        <form id="profile-form" class="box" method="POST">
+          {{ form.hidden_tag() }}
+          <h1 class="title is-4 has-text-centered mb-5">
+            <i class="fas fa-user-gear mr-2"></i> Perfil de Usuario
+          </h1>
+
+          <div class="field">
+            <label class="label">{{ form.name.label }}</label>
+            <div class="control has-icons-left">
+              {{ form.name(class="input", placeholder="Tu nombre",
+              value=current_user.name, readonly=True) }}
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">{{ form.email.label }}</label>
+            <div class="control has-icons-left">
+              {{ form.email(class="input", placeholder="ejemplo@correo.com",
+              value=current_user.email, readonly=True) }}
+              <span class="icon is-small is-left">
+                <i class="fas fa-at"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="buttons is-centered mt-4">
+            <button
+              id="edit-btn"
+              type="button"
+              class="button is-warning"
+              onclick="toggleEdit()"
+            >
+              <i class="fas fa-pen mr-1"></i> Editar
+            </button>
+
+            <button
+              id="save-btn"
+              type="submit"
+              class="button is-success is-hidden"
+            >
+              <i class="fas fa-save mr-1"></i> {{ form.submit.label }}
+            </button>
+
+            <a href="{{ url_for('auth.logout') }}" class="button is-danger">
+              <i class="fas fa-arrow-right-from-bracket mr-1"></i> Cerrar sesión
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

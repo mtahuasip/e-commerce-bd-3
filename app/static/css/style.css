@@ -25,6 +25,15 @@ footer.footer {
   margin-top: auto;
 }
 
+input[readonly] {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
 .cart-badge {
   position: absolute;
   top: -0.3rem;
@@ -54,7 +63,8 @@ footer.footer {
 .notification-toast {
   position: fixed;
   top: 20px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
 }
 
