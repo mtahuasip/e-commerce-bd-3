@@ -39,7 +39,7 @@ class User:
         user_dict = {
             "name": self.name,
             "email": self.email,
-            # "password_hash": self.password_hash,
+            "password_hash": self.password_hash,
             "is_admin": self.is_admin,
             "is_staff": self.is_staff,
             "created_at": self.created_at,
@@ -57,7 +57,7 @@ class User:
             _id=data["_id"] if "_id" in data else None,
             name=data["name"],
             email=data["email"],
-            password_hash=data["password_hash"],
+            # password_hash=data["password_hash"],
             is_admin=data["is_admin"],
             is_staff=data["is_staff"],
             created_at=data["created_at"],
