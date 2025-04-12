@@ -49,7 +49,18 @@
       </div>
     </main>
 
-    {% block footer %}{% include 'partials/footer.html' %}{% endblock %}
+    {% block footer %}{% include 'partials/footer.html' %}{% endblock %} {% with
+    messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+
+    <div id="toast-container" class="notification-toast">
+      {% for category, message in messages %}
+      <div class="notification is-{{ category }} flash-toast">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% endif %} {% endwith %}
 
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"

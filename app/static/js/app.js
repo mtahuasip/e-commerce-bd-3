@@ -60,3 +60,10 @@ function updateTotal() {
   });
   $("#total-price").text("$" + total.toFixed(2));
 }
+
+const TOAST_TIMEOUT = 5000;
+
+setTimeout(() => {
+  const toasts = document.querySelectorAll(".flash-toast");
+  toasts.forEach((t) => t.remove());
+}, TOAST_TIMEOUT);

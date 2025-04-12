@@ -1,8 +1,19 @@
 from flask import Flask
+from flask_pymongo import PyMongo
+from .config import Config
+from .init_indexes import create_indexes
+
+# Instancia de MongoDB
+mongo = PyMongo()
 
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object(Config)
+
+    # Se inicializa la conexión a MongoDB
+    mongo.init_app(app)
+    create_indexes(mongo.db)
 
     from .routes.public_routes import public
     from .routes.auth_routes import auth
