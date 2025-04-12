@@ -1,0 +1,94 @@
+{% extends "layout/base.html" %} {% block title %}📝 Registrarse{% endblock %}
+{% block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+        <form class="box">
+          <h1 class="title is-4 has-text-centered mb-5">
+            <i class="fas fa-user-plus mr-2"></i> Crear cuenta
+          </h1>
+
+          <!-- Nombre completo -->
+          <div class="field">
+            <label class="label">Nombre completo</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="text"
+                placeholder="Tu nombre"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Correo -->
+          <div class="field">
+            <label class="label">Correo electrónico</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="email"
+                placeholder="ejemplo@correo.com"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="field">
+            <label class="label">Contraseña</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="password"
+                placeholder="••••••••"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Confirmar contraseña -->
+          <div class="field">
+            <label class="label">Confirmar contraseña</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="password"
+                placeholder="Repite tu contraseña"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Botón -->
+          <div class="field">
+            <button class="button is-success is-fullwidth">
+              <i class="fas fa-user-plus mr-2"></i> Registrarse
+            </button>
+          </div>
+
+          <!-- Ya tienes cuenta -->
+          <p class="has-text-centered is-size-7">
+            ¿Ya tienes una cuenta? <a href="#">Inicia sesión</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "layout/base.html" %} {% block title %}🏚️ Inicio{% endblock %} {%
+block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="hero is-primary is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-size-1 has-text-white has-text-weight-bold">
+        🛒 E-Commerce
+      </h1>
+      <p class="subtitle has-text-white is-size-4">
+        Tu tienda online de productos electrónicos: computadoras, smartphones,
+        accesorios y más. Calidad, buen precio y entregas rápidas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline is-centered">
+      <div class="column is-4">
+        <div class="box has-text-centered min-height-box">
+          <span class="icon is-large">
+            <i class="fas fa-laptop fa-3x"></i>
+          </span>
+          <h2 class="title is-4">Tecnología de punta</h2>
+          <p>
+            Encuentra los dispositivos más modernos del mercado, desde laptops
+            hasta smartwatches.
+          </p>
+        </div>
+      </div>
+
+      <div class="column is-4">
+        <div class="box has-text-centered min-height-box">
+          <span class="icon is-large">
+            <i class="fas fa-shipping-fast fa-3x"></i>
+          </span>
+          <h2 class="title is-4">Envíos rápidos</h2>
+          <p>
+            Entrega segura y rápida a todo el país. Rastrea tu pedido desde el
+            primer momento.
+          </p>
+        </div>
+      </div>
+
+      <div class="column is-4">
+        <div class="box has-text-centered min-height-box">
+          <span class="icon is-large">
+            <i class="fas fa-lock fa-3x"></i>
+          </span>
+          <h2 class="title is-4">Compra segura</h2>
+          <p>
+            Tus datos y pagos están protegidos con estándares de seguridad de
+            nivel bancario.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <h2 class="title is-3">¿Quiénes somos?</h2>
+    <p class="subtitle is-5">
+      Somos una tienda virtual creada como proyecto académico, enfocada en
+      ofrecer productos tecnológicos de calidad a buenos precios.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered">Contacto</h2>
+    <form action="/" method="POST" class="box">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Tu nombre" required />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input
+            class="input"
+            type="email"
+            placeholder="tucorreo@ejemplo.com"
+            required
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Mensaje</label>
+        <div class="control">
+          <textarea
+            class="textarea"
+            placeholder="Tu mensaje..."
+            required
+          ></textarea>
+        </div>
+      </div>
+      <div class="control has-text-centered">
+        <button class="button is-primary is-medium">Enviar</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

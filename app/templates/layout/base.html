@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    {% block head %}
+
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Tienda online de productos tecnológicos. Proyecto académico con Flask, MongoDB y Redis."
+    />
+    <meta name="author" content="Dupla 3 - Base de Datos III" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <title>
+      {% block title %}{% endblock %} | 🛍️ E-Commerce con Redis 🐍 & MongoDB 🍃
+      - Dupla 3️⃣ | 🧠 Base de Datos III
+    </title>
+
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block navbar %}{% include 'partials/navbar.html' %}{% endblock %}
+
+    <main class="section">
+      <div class="container mt-6">
+        <div class="columns">
+          {% if show_sidebar %}
+          <aside class="column is-2">
+            {% block sidebar %}{% include 'partials/sidebar.html' %}{% endblock
+            %}
+          </aside>
+          {% set content_col = "is-10" %} {% else %} {% set content_col =
+          "is-12" %} {% endif %}
+
+          <div class="column {{ content_col }}">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {% block footer %}{% include 'partials/footer.html' %}{% endblock %}
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

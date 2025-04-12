@@ -1,0 +1,74 @@
+{% extends "layout/base.html" %} {% block title %}✏️ Editar perfil{% endblock %}
+{% block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="box is-max-desktop mx-auto">
+      <h1 class="title is-4 has-text-centered mb-5">
+        <i class="fas fa-user-edit mr-2"></i> Editar perfil
+      </h1>
+
+      <form>
+        <!-- Imagen de perfil (placeholder) -->
+        <div class="field has-text-centered mb-5">
+          <figure class="image is-128x128 is-inline-block">
+            <img
+              class="is-rounded"
+              src="https://bulma.io/assets/images/placeholders/1280x960.png"
+              alt="Foto de perfil"
+            />
+          </figure>
+          <div class="mt-2">
+            <button class="button is-small is-light">
+              <i class="fas fa-upload mr-1"></i> Cambiar imagen
+            </button>
+          </div>
+        </div>
+
+        <!-- Nombre -->
+        <div class="field">
+          <label class="label">Nombre completo</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="Tu nombre"
+              value="Nombre actual"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="field">
+          <label class="label">Correo electrónico</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="email"
+              placeholder="Tu correo"
+              value="usuario@correo.com"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Botón guardar -->
+        <div class="field mt-5">
+          <div class="buttons is-centered">
+            <button class="button is-success">
+              <i class="fas fa-save mr-1"></i> Guardar cambios
+            </button>
+            <a href="#" class="button is-light"> Cancelar </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+<button
+  id="toggleSidebar"
+  class="button is-info is-fullwidth is-hidden-tablet mb-3"
+>
+  <i class="fas fa-sliders-h mr-2"></i> Filtros
+</button>
+
+<aside id="sidebar" class="menu is-hidden-mobile">
+  {% if active_page == 'products' %}
+  <p class="menu-label">Filtrar por</p>
+  <ul class="menu-list">
+    <li>
+      <a class="is-active"><i class="fas fa-laptop mr-2"></i> Categorías</a>
+      <ul>
+        <li>
+          <a><i class="fas fa-desktop mr-2"></i> Computadoras</a>
+        </li>
+        <li>
+          <a><i class="fas fa-mobile-alt mr-2"></i> Smartphones</a>
+        </li>
+        <li>
+          <a><i class="fas fa-headphones-alt mr-2"></i> Accesorios</a>
+        </li>
+        <li>
+          <a><i class="fas fa-camera-retro mr-2"></i> Cámaras</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a><i class="fas fa-sort mr-2"></i> Ordenar por</a>
+      <ul>
+        <li>
+          <a><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a>
+        </li>
+        <li>
+          <a><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a>
+        </li>
+        <li>
+          <a
+            ><i class="fas fa-sort-amount-down mr-2"></i> Precio: menor a
+            mayor</a
+          >
+        </li>
+        <li>
+          <a
+            ><i class="fas fa-sort-amount-up mr-2"></i> Precio: mayor a menor</a
+          >
+        </li>
+        <li>
+          <a><i class="fas fa-clock mr-2"></i> Más recientes</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  {% elif active_page == 'categories' %}
+  <p class="menu-label">Ordenar categorías</p>
+  <ul class="menu-list">
+    <li>
+      <a><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a>
+    </li>
+    <li>
+      <a><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a>
+    </li>
+    <li>
+      <a><i class="fas fa-clock mr-2"></i> Más recientes</a>
+    </li>
+  </ul>
+  {% else %}
+  <p class="menu-label">Menú</p>
+  <ul class="menu-list">
+    <li>
+      <a><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a>
+    </li>
+    <li>
+      <a><i class="fas fa-users mr-2"></i> Clientes</a>
+    </li>
+  </ul>
+  {% endif %}
+</aside>

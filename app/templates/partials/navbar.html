@@ -1,0 +1,125 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{{ url_for('public.home') }}">
+      <strong class="is-size-4 has-text-weight-bold">🛒 E-Commerce</strong>
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbar-menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a
+        href="{{ url_for('public.home') }}"
+        class="navbar-item {% if active_page == 'home' %}is-active{% endif %}"
+      >
+        <i class="fas fa-home mr-1"></i> Inicio
+      </a>
+
+      <a
+        href="{{ url_for('public.products') }}"
+        class="navbar-item {% if active_page == 'products' %}is-active{% endif %}"
+      >
+        <i class="fas fa-boxes mr-1"></i> Productos
+      </a>
+
+      <a
+        href="{{ url_for('public.categories') }}"
+        class="navbar-item {% if active_page == 'categories' %}is-active{% endif %}"
+      >
+        <i class="fas fa-tags mr-1"></i> Categorías
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="button is-warning" href="{{ url_for('cart.view') }}">
+          <i class="fas fa-shopping-cart mr-1"></i> Carrito
+          <span
+            id="cart-count"
+            class="tag is-danger is-rounded is-small cart-badge"
+            >3</span
+          >
+        </a>
+      </div>
+
+      <div class="navbar-item">
+        <a class="button is-light" href="{{ url_for('auth.login') }}">
+          <i class="fas fa-sign-in-alt mr-1"></i> Iniciar sesión
+        </a>
+      </div>
+
+      <div class="navbar-item">
+        <a class="button is-primary" href="{{ url_for('auth.register') }}">
+          <i class="fas fa-user-plus mr-1"></i> Registrarse
+        </a>
+      </div>
+
+      <div class="navbar-item dropdown is-hoverable is-right">
+        <div class="dropdown-trigger">
+          <button
+            class="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+          >
+            <span><i class="fas fa-user-circle mr-1"></i> Mi cuenta</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a
+              class="dropdown-item {% if active_page == 'profile' %}is-active{% endif %}"
+              href="{{ url_for('account.profile') }}"
+            >
+              <i class="fas fa-id-badge mr-2"></i> Mi perfil
+            </a>
+            <a
+              class="dropdown-item {% if active_page == 'edit_profile' %}is-active{% endif %}"
+              href="{{ url_for('auth.edit_profile') }}"
+            >
+              <i class="fa-solid fa-pencil mr-2"></i> Editar perfil
+            </a>
+            <a
+              class="dropdown-item {% if active_page == 'change_password' %}is-active{% endif %}"
+              href="{{ url_for('auth.change_password') }}"
+            >
+              <i class="fa-solid fa-key mr-2"></i> Cambiar contraseña
+            </a>
+            <a
+              class="dropdown-item {% if active_page == 'orders' %}is-active{% endif %}"
+              href="{{ url_for('account.orders') }}"
+            >
+              <i class="fas fa-box mr-2"></i> Pedidos
+            </a>
+            <a
+              class="dropdown-item {% if active_page == 'purchases' %}is-active{% endif %}"
+              href="{{ url_for('account.purchases') }}"
+            >
+              <i class="fas fa-credit-card mr-2"></i> Compras
+            </a>
+            <hr class="navbar-divider" />
+            <a
+              class="dropdown-item has-text-danger"
+              href="{{ url_for('auth.logout') }}"
+            >
+              <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

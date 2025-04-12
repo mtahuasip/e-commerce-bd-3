@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer.footer {
+  margin-top: auto;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.3rem;
+  font-size: 0.7rem;
+}
+
+.hero.is-primary {
+  background-image: url("../img/store-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.min-height-box {
+  min-height: 210px;
+}
+
+.floating-tag {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}

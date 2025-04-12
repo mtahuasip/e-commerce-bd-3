@@ -1,0 +1,52 @@
+{% extends "layout/base.html" %} {% block title %}📦 Pedidos{% endblock %} {%
+block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title is-4 has-text-centered mb-5">
+      <i class="fas fa-box mr-2"></i> Historial de pedidos
+    </h1>
+
+    <!-- Lista de pedidos -->
+    <div class="box is-max-desktop mx-auto">
+      <!-- Pedido 1 -->
+      <article class="box mb-4">
+        <p><strong>Número de pedido:</strong> #123456</p>
+        <p><strong>Fecha:</strong> 10 abril 2025</p>
+        <p>
+          <strong>Estado:</strong> <span class="tag is-success">Entregado</span>
+        </p>
+        <p><strong>Total:</strong> $1,499.00</p>
+        <div class="mt-3">
+          <a class="button is-small is-link">
+            <i class="fas fa-eye mr-1"></i> Ver detalles
+          </a>
+        </div>
+      </article>
+
+      <!-- Pedido 2 -->
+      <article class="box mb-4">
+        <p><strong>Número de pedido:</strong> #123455</p>
+        <p><strong>Fecha:</strong> 7 abril 2025</p>
+        <p>
+          <strong>Estado:</strong> <span class="tag is-warning">En camino</span>
+        </p>
+        <p><strong>Total:</strong> $899.00</p>
+        <div class="mt-3">
+          <a class="button is-small is-link">
+            <i class="fas fa-eye mr-1"></i> Ver detalles
+          </a>
+        </div>
+      </article>
+
+      <!-- Si no hay pedidos -->
+      <!--
+      <div class="notification is-light has-text-centered">
+        <i class="fas fa-info-circle mr-2"></i> Aún no has realizado ningún pedido.
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+{% endblock %}

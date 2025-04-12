@@ -1,0 +1,54 @@
+{% extends "layout/base.html" %} {% block title %}🛒 Historial de compras{%
+endblock %} {% block head %} {{ super() }} {% endblock %} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title is-4 has-text-centered mb-5">
+      <i class="fas fa-shopping-cart mr-2"></i> Historial de compras
+    </h1>
+
+    <!-- Lista de compras -->
+    <div class="box is-max-desktop mx-auto">
+      <!-- Compra 1 -->
+      <article class="box mb-4">
+        <p><strong>Número de compra:</strong> #789456</p>
+        <p><strong>Fecha:</strong> 15 marzo 2025</p>
+        <p><strong>Total gastado:</strong> $1,200.00</p>
+        <p>
+          <strong>Estado:</strong>
+          <span class="tag is-success">Completado</span>
+        </p>
+        <div class="mt-3">
+          <a class="button is-small is-link">
+            <i class="fas fa-eye mr-1"></i> Ver detalles
+          </a>
+        </div>
+      </article>
+
+      <!-- Compra 2 -->
+      <article class="box mb-4">
+        <p><strong>Número de compra:</strong> #789457</p>
+        <p><strong>Fecha:</strong> 10 marzo 2025</p>
+        <p><strong>Total gastado:</strong> $700.00</p>
+        <p>
+          <strong>Estado:</strong>
+          <span class="tag is-warning">En proceso</span>
+        </p>
+        <div class="mt-3">
+          <a class="button is-small is-link">
+            <i class="fas fa-eye mr-1"></i> Ver detalles
+          </a>
+        </div>
+      </article>
+
+      <!-- Si no hay compras -->
+      <!--
+      <div class="notification is-light has-text-centered">
+        <i class="fas fa-info-circle mr-2"></i> Aún no has realizado ninguna compra.
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+{% endblock %}
