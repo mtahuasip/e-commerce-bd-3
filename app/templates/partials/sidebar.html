@@ -10,7 +10,9 @@
   <p class="menu-label">Filtrar por</p>
   <ul class="menu-list">
     <li>
-      <a><i class="fas fa-sort mr-2"></i> Ordenar por</a>
+      <a href="{{ url_for('public.products') }}">
+        <i class="fas fa-sort mr-2"></i> Ordenar por
+      </a>
       <ul>
         <li>
           <a
@@ -64,7 +66,9 @@
     </li>
 
     <li>
-      <a><i class="fas fa-tags mr-2"></i> Categorías</a>
+      <a href="{{ url_for('public.products') }}">
+        <i class="fas fa-tags mr-2"></i> Categorías
+      </a>
       <ul>
         {% for category in categories %}
         <li>
