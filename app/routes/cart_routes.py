@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, flash
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_required, current_user
 from app.models.cart import Cart
 
 cart = Blueprint("cart", __name__)
