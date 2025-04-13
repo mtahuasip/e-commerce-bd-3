@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from bson import ObjectId
-import redis as PyRedis
+import redis
 from .extensions import mongo, redis
 from .config import Config
 from .init_indexes import create_indexes
@@ -16,13 +16,7 @@ def create_app():
     mongo.init_app(app)
     create_indexes(mongo.db)
 
-    global redis
-    redis = PyRedis.Redis(
-        host=app.config["REDIS_HOST"],
-        port=app.config["REDIS_PORT"],
-        db=0,
-        decode_responses=True,
-    )
+    redis.init_app(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)

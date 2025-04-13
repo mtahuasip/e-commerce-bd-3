@@ -1,4 +1,5 @@
 from flask_pymongo import PyMongo
+from flask_redis import FlaskRedis
 
 mongo = PyMongo()
-redis = None
+redis = FlaskRedis()
