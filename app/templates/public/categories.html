@@ -18,7 +18,7 @@ block head %} {{ super() }} {% endblock %} {% block content %}
         <div class="card">
           <div class="card-image" style="position: relative">
             <figure class="image is-4by3">
-              <img src="{{ category.image_url }}" alt="Producto" />
+              <img src="{{ category.image_url }}" alt="{{ category.name }}" />
             </figure>
 
             <div class="floating-tag">
@@ -26,7 +26,7 @@ block head %} {{ super() }} {% endblock %} {% block content %}
               <span class="tag is-warning is-light has-text-weight-semibold">
                 <i class="fas fa-star mr-1"></i> Nueva categoría
               </span>
-              {% endif %} {% if category.products|length==0 %}
+              {% endif %} {% if category.products|length == 0 %}
               <span class="tag is-danger is-light has-text-weight-semibold">
                 <i class="fas fa-times-circle mr-1"></i> Sin stock
               </span>

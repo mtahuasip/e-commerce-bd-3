@@ -5,37 +5,52 @@ block head %} {{ super() }} {% endblock %} {% block content %}
   <div class="container">
     <h1 class="title is-3 has-weight-bold">Productos</h1>
 
+    {% if products|length == 0 %}
+    <div class="notification is-warning is-light has-text-weight-semibold">
+      <span class="icon"><i class="fas fa-exclamation-triangle mr-1"></i></span>
+      Actualmente no hay productos disponibles. ¡Vuelve pronto para descubrir
+      nuevos productos!
+    </div>
+    {% endif %}
+
     <div class="columns is-multiline">
-      {% for i in range(133) %}
+      {% for product in products %}
       <div class="column is-12-mobile is-6-tablet is-4-desktop">
         <div class="card">
           <div class="card-image" style="position: relative">
             <figure class="image is-4by3">
               <img
-                src="https://bulma.io/assets/images/placeholders/1280x960.png"
-                alt="Producto"
+                src="{{ product.image_url }}"
+                alt="{{ product.description }}"
               />
             </figure>
 
             <div class="floating-tag">
+              {% if product.created_at > last_week %}
               <span class="tag is-warning is-light has-text-weight-semibold">
-                <i class="fas fa-star mr-1"></i> Nuevo
+                <i class="fas fa-star mr-1"></i> Nueva categoría
               </span>
+              {% endif %} {% if product.stock == 0 %}
+              <span class="tag is-danger is-light has-text-weight-semibold">
+                <i class="fas fa-times-circle mr-1"></i> Sin stock
+              </span>
+              {% else %}
               <span class="tag is-success is-light has-text-weight-semibold">
-                <i class="fas fa-check-circle mr-1"></i> En stock
+                <i class="fas fa-check-circle mr-1"></i> Con stock
               </span>
+              {% endif %}
             </div>
           </div>
 
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <p class="title is-5">Laptop Pro 2025</p>
+                <p class="title is-5">{{ product.name }}</p>
                 <p class="subtitle is-6 has-text-weight-semibold mt-2">
-                  $1,299.99
+                  {{ product.price }} Bs.
                 </p>
                 <!-- <p class="mt-3 has-text-grey-dark is-size-7">
-                  Potente laptop con procesador M3, ideal para edición y gaming.
+                  {{ product.description }}
                 </p> -->
               </div>
             </div>

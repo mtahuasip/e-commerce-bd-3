@@ -10,45 +10,72 @@
   <p class="menu-label">Filtrar por</p>
   <ul class="menu-list">
     <li>
-      <a class="is-active"><i class="fas fa-laptop mr-2"></i> Categorías</a>
-      <ul>
-        <li>
-          <a><i class="fas fa-desktop mr-2"></i> Computadoras</a>
-        </li>
-        <li>
-          <a><i class="fas fa-mobile-alt mr-2"></i> Smartphones</a>
-        </li>
-        <li>
-          <a><i class="fas fa-headphones-alt mr-2"></i> Accesorios</a>
-        </li>
-        <li>
-          <a><i class="fas fa-camera-retro mr-2"></i> Cámaras</a>
-        </li>
-      </ul>
-    </li>
-    <li>
       <a><i class="fas fa-sort mr-2"></i> Ordenar por</a>
       <ul>
         <li>
-          <a><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a>
-        </li>
-        <li>
-          <a><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a>
+          <a
+            href="{{ url_for('public.products', sort='a-z', category=category_name) }}"
+            class="{% if sort == 'a-z' %}is-active{% endif %}"
+          >
+            <i class="fas fa-sort-alpha-down mr-2"></i> A-Z
+          </a>
         </li>
         <li>
           <a
-            ><i class="fas fa-sort-amount-down mr-2"></i> Precio: menor a
-            mayor</a
+            href="{{ url_for('public.products', sort='z-a', category=category_name) }}"
+            class="{% if sort == 'z-a' %}is-active{% endif %}"
           >
+            <i class="fas fa-sort-alpha-up mr-2"></i> Z-A
+          </a>
         </li>
         <li>
           <a
-            ><i class="fas fa-sort-amount-up mr-2"></i> Precio: mayor a menor</a
+            href="{{ url_for('public.products', sort='price-asc', category=category_name) }}"
+            class="{% if sort == 'price-asc' %}is-active{% endif %}"
           >
+            <i class="fas fa-sort-amount-down mr-2"></i> Precio: menor a mayor
+          </a>
         </li>
         <li>
-          <a><i class="fas fa-clock mr-2"></i> Más recientes</a>
+          <a
+            href="{{ url_for('public.products', sort='price-desc', category=category_name) }}"
+            class="{% if sort == 'price-desc' %}is-active{% endif %}"
+          >
+            <i class="fas fa-sort-amount-up mr-2"></i> Precio: mayor a menor
+          </a>
         </li>
+        <li>
+          <a
+            href="{{ url_for('public.products', sort='newest', category=category_name) }}"
+            class="{% if sort == 'newest' %}is-active{% endif %}"
+          >
+            <i class="fas fa-clock mr-2"></i> Más recientes
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{ url_for('public.products', sort='oldest', category=category_name) }}"
+            class="{% if sort == 'oldest' %}is-active{% endif %}"
+          >
+            <i class="fas fa-clock mr-2"></i> Más antiguos
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a><i class="fas fa-tags mr-2"></i> Categorías</a>
+      <ul>
+        {% for category in categories %}
+        <li>
+          <a
+            href="{{ url_for('public.products', category=category.slug, sort=sort) }}"
+            class="{% if category_name == category.slug %}is-active{% endif %}"
+          >
+            {{ category.name }}</a
+          >
+        </li>
+        {% endfor %}
       </ul>
     </li>
   </ul>
@@ -57,23 +84,30 @@
   <ul class="menu-list">
     <li>
       <a
-        href="/categories?sort=az"
-        class="{% if sort == 'az' %}is-active{% endif %}"
+        href="/categories?sort=a-z"
+        class="{% if sort == 'a-z' %}is-active{% endif %}"
         ><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a
       >
     </li>
     <li>
       <a
-        href="/categories?sort=za"
-        class="{% if sort == 'za' %}is-active{% endif %}"
+        href="/categories?sort=z-a"
+        class="{% if sort == 'z-a' %}is-active{% endif %}"
         ><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a
       >
     </li>
     <li>
       <a
-        href="/categories?sort=recent"
-        class="{% if sort == 'recent' %}is-active{% endif %}"
+        href="/categories?sort=newest"
+        class="{% if sort == 'newest' %}is-active{% endif %}"
         ><i class="fas fa-clock mr-2"></i> Más recientes</a
+      >
+    </li>
+    <li>
+      <a
+        href="/categories?sort=oldest"
+        class="{% if sort == 'oldest' %}is-active{% endif %}"
+        ><i class="fas fa-clock mr-2"></i> Más antiguos</a
       >
     </li>
   </ul>

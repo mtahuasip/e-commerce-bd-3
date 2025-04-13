@@ -59,7 +59,7 @@ class User(UserMixin):
         }
 
         if self._id:
-            user_dict["_id"] = str(self._id)
+            user_dict["_id"] = ObjectId(self._id)
 
         return user_dict
 

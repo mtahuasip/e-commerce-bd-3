@@ -37,7 +37,7 @@ class Category:
         }
 
         if self._id:
-            category_dict["_id"] = str(self._id)
+            category_dict["_id"] = ObjectId(self._id)
 
         return category_dict
 
@@ -82,16 +82,30 @@ class Category:
             return None, f"Error al buscar categoría: {e}", "danger"
 
     @staticmethod
+    def find_by_slug(slug):
+        try:
+            category = mongo.db.categories.find_one({"slug": slug})
+
+            if category:
+                return Category.from_dict(category), None, "success"
+
+            return None, "Categoría no encontrada", "danger"
+        except Exception as e:
+            return None, f"Error al buscar categoría: {e}", "danger"
+
+    @staticmethod
     def find_all(option=None):
         try:
             sort_option = None
 
-            if option == "az":
+            if option == "a-z":
                 sort_option = [("name", 1)]
-            elif option == "za":
+            elif option == "z-a":
                 sort_option = [("name", -1)]
-            elif option == "recent":
+            elif option == "newest":
                 sort_option = [("created_at", -1)]
+            elif option == "oldest":
+                sort_option = [("created_at", 1)]
 
             categories_cursor = mongo.db.categories.find()
             if sort_option:
