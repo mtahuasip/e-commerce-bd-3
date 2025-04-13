@@ -31,7 +31,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user, message, category = User.find_user_by_email(form.email.data)
+        user, message, category = User.find_one_by_email(form.email.data)
 
         if not user:
             flash(message, category)

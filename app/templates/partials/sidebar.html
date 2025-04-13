@@ -56,13 +56,25 @@
   <p class="menu-label">Ordenar categorías</p>
   <ul class="menu-list">
     <li>
-      <a><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a>
+      <a
+        href="/categories?sort=az"
+        class="{% if sort == 'az' %}is-active{% endif %}"
+        ><i class="fas fa-sort-alpha-down mr-2"></i> A-Z</a
+      >
     </li>
     <li>
-      <a><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a>
+      <a
+        href="/categories?sort=za"
+        class="{% if sort == 'za' %}is-active{% endif %}"
+        ><i class="fas fa-sort-alpha-up mr-2"></i> Z-A</a
+      >
     </li>
     <li>
-      <a><i class="fas fa-clock mr-2"></i> Más recientes</a>
+      <a
+        href="/categories?sort=recent"
+        class="{% if sort == 'recent' %}is-active{% endif %}"
+        ><i class="fas fa-clock mr-2"></i> Más recientes</a
+      >
     </li>
   </ul>
   {% else %}

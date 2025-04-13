@@ -1,42 +1,56 @@
 {% extends "layout/base.html" %} {% block title %}🏷️ Categorías{% endblock %} {%
 block head %} {{ super() }} {% endblock %} {% block content %}
-
 <section class="section">
   <div class="container">
     <h1 class="title is-3 has-weight-bold">Categorías</h1>
 
+    {% if categories|length == 0 %}
+    <div class="notification is-warning is-light has-text-weight-semibold">
+      <span class="icon"><i class="fas fa-exclamation-triangle mr-1"></i></span>
+      Actualmente no hay categorías disponibles. ¡Vuelve pronto para descubrir
+      nuevos productos!
+    </div>
+    {% endif %}
+
     <div class="columns is-multiline">
-      {% for i in range(10) %}
+      {% for category in categories %}
       <div class="column is-12-mobile is-6-tablet is-4-desktop">
         <div class="card">
           <div class="card-image" style="position: relative">
             <figure class="image is-4by3">
-              <img
-                src="https://bulma.io/assets/images/placeholders/1280x960.png"
-                alt="Producto"
-              />
+              <img src="{{ category.image_url }}" alt="Producto" />
             </figure>
 
             <div class="floating-tag">
+              {% if category.created_at > last_week %}
               <span class="tag is-warning is-light has-text-weight-semibold">
                 <i class="fas fa-star mr-1"></i> Nueva categoría
               </span>
+              {% endif %} {% if category.products|length==0 %}
+              <span class="tag is-danger is-light has-text-weight-semibold">
+                <i class="fas fa-times-circle mr-1"></i> Sin stock
+              </span>
+              {% else %}
               <span class="tag is-success is-light has-text-weight-semibold">
                 <i class="fas fa-check-circle mr-1"></i> Con stock
               </span>
+              {% endif %}
             </div>
           </div>
 
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <p class="title is-5">Computadoras</p>
+                <p class="title is-5">{{ category.name }}</p>
               </div>
             </div>
           </div>
 
           <footer class="card-footer">
-            <a href="#" class="card-footer-item has-text-primary">
+            <a
+              href="/products?category={{ category.slug }}"
+              class="card-footer-item has-text-primary"
+            >
               <span class="icon"><i class="fas fa-boxes mr-1"></i></span>
               <span>Ver productos</span>
             </a>
@@ -47,5 +61,4 @@ block head %} {{ super() }} {% endblock %} {% block content %}
     </div>
   </div>
 </section>
-
 {% endblock %}

@@ -26,6 +26,9 @@ class User(UserMixin):
         self.created_at = created_at or datetime.now(timezone.utc)
         self.updated_at = updated_at or datetime.now(timezone.utc)
 
+    def __str__(self):
+        return f"<User {self.email}>"
+
     @property
     def id(self):
         return str(self._id) if self._id else None
@@ -73,9 +76,6 @@ class User(UserMixin):
             updated_at=data["updated_at"],
         )
 
-    def __str__(self):
-        return f"<User {self.email}>"
-
     @staticmethod
     def create(data):
         if data["password"] != data["password_confirm"]:
@@ -95,18 +95,26 @@ class User(UserMixin):
             return f"Error al crear usuario: {e}", "danger"
 
     @staticmethod
-    def find_user_by_id(id):
-        user = mongo.db.users.find_one({"_id": ObjectId(id)})
-        if user:
-            return User.from_dict(user, True), None, "success"
-        return None, "Usuario no encontrado", "danger"
+    def find_one_by_id(id):
+        try:
+            user = mongo.db.users.find_one({"_id": ObjectId(id)})
+            if user:
+                return User.from_dict(user, True), None, "success"
+
+            return None, "Usuario no encontrado", "danger"
+        except Exception as e:
+            return None, f"Error al buscar usuario: {e}", "danger"
 
     @staticmethod
-    def find_user_by_email(email):
-        user = mongo.db.users.find_one({"email": email})
-        if user:
-            return User.from_dict(user, True), None, "success"
-        return None, "Usuario no encontrado", "danger"
+    def find_one_by_email(email):
+        try:
+            user = mongo.db.users.find_one({"email": email})
+            if user:
+                return User.from_dict(user, True), None, "success"
+
+            return None, "Usuario no encontrado", "danger"
+        except Exception as e:
+            return None, f"Error al buscar usuario: {e}", "danger"
 
     @staticmethod
     def update(id, data):
