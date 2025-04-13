@@ -114,6 +114,20 @@
         ><i class="fas fa-clock mr-2"></i> Más antiguos</a
       >
     </li>
+    <li>
+      <a
+        href="/categories?sort=stock"
+        class="{% if sort == 'stock' %}is-active{% endif %}"
+        ><i class="fas fa-check-circle mr-2"></i>Con stock</a
+      >
+    </li>
+    <li>
+      <a
+        href="/categories?sort=no-stock"
+        class="{% if sort == 'no-stock' %}is-active{% endif %}"
+        ><i class="fas fa-times-circle mr-2"></i> Sin stock</a
+      >
+    </li>
   </ul>
   {% else %}
   <p class="menu-label">Menú</p>

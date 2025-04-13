@@ -24,7 +24,7 @@ block head %} {{ super() }} {% endblock %} {% block content %}
             <div class="floating-tag">
               {% if category.created_at > last_week %}
               <span class="tag is-warning is-light has-text-weight-semibold">
-                <i class="fas fa-star mr-1"></i> Nueva categoría
+                <i class="fas fa-star mr-1"></i> Nueva
               </span>
               {% endif %} {% if category.products|length == 0 %}
               <span class="tag is-danger is-light has-text-weight-semibold">
@@ -47,6 +47,7 @@ block head %} {{ super() }} {% endblock %} {% block content %}
           </div>
 
           <footer class="card-footer">
+            {% if category.products|length != 0 %}
             <a
               href="/products?category={{ category.slug }}"
               class="card-footer-item has-text-primary"
@@ -54,6 +55,12 @@ block head %} {{ super() }} {% endblock %} {% block content %}
               <span class="icon"><i class="fas fa-boxes mr-1"></i></span>
               <span>Ver productos</span>
             </a>
+            {% else %}
+            <a href="/products" class="card-footer-item has-text-primary">
+              <span class="icon"><i class="fas fa-boxes mr-1"></i></span>
+              <span>Ver todos productos</span>
+            </a>
+            {% endif %}
           </footer>
         </div>
       </div>

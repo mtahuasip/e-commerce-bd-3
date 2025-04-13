@@ -60,3 +60,26 @@ def products():
         sort=sort,
         category_name=category_name,
     )
+
+
+@public.route("/products/<string:product_slug>", methods=["GET"])
+def product(product_slug):
+    product, message, category = Product.find_by_slug(product_slug)
+
+    if category == "danger":
+        flash(message, category)
+        return redirect("/products")
+
+    category_product, message, category = Category.find_by_id(product.category_id)
+
+    if category == "danger":
+        flash(message, category)
+        return redirect("/products")
+
+    return render_template(
+        "public/product.html",
+        show_sidebar=False,
+        active_page="",
+        product=product,
+        category_product=category_product,
+    )

@@ -97,6 +97,7 @@ class Category:
     def find_all(option=None):
         try:
             sort_option = None
+            filter_query = {}
 
             if option == "a-z":
                 sort_option = [("name", 1)]
@@ -107,15 +108,41 @@ class Category:
             elif option == "oldest":
                 sort_option = [("created_at", 1)]
 
-            categories_cursor = mongo.db.categories.find()
+            elif option == "stock":
+                filter_query["products.0"] = {"$exists": True}
+            elif option == "no-stock":
+                filter_query["products"] = {"$size": 0}
+
+            categories_cursor = mongo.db.categories.find(filter_query)
             if sort_option:
                 categories_cursor = categories_cursor.sort(sort_option)
 
-            categories = [
-                Category.from_dict(category) for category in categories_cursor
-            ]
-
+            categories = [Category.from_dict(cat) for cat in categories_cursor]
             return categories, None, "success"
 
         except Exception as e:
             return [], f"Error al buscar categorías: {e}", "danger"
+
+    @staticmethod
+    def add_product(category_id, product_id):
+        try:
+            category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+
+            if not category:
+                return "Categoría no encontrada", "danger"
+
+            if product_id in category["products"]:
+                return "El producto ya está en la categoría", "warning"
+
+            mongo.db.categories.update_one(
+                {"_id": ObjectId(category_id)},
+                {
+                    "$push": {"products": product_id},
+                    "$set": {"updated_at": datetime.now(timezone.utc)},
+                },
+            )
+
+            return "Producto añadido a la categoría correctamente", "success"
+
+        except Exception as e:
+            return f"Error al añadir producto a la categoría: {e}", "danger"

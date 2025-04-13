@@ -1,0 +1,61 @@
+{% extends "layout/base.html" %} {% block title %} 📦 {{ product.name }} {%
+endblock %} {% block head %} {{ super() }} {% endblock %} {% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <figure class="image is-4by3">
+          <img
+            src="{{ product.image_url }}"
+            alt="Imagen de {{ product.name }}"
+            class="has-shadow"
+            style="border-radius: 16px"
+          />
+        </figure>
+      </div>
+
+      <div class="column is-6">
+        <h1 class="title is-2 has-text-weight-bold">{{ product.name }}</h1>
+        <p class="subtitle is-5 has-text-grey">
+          Categoría:
+          <a
+            href="{{ url_for('public.products', category=category_product.slug) }}"
+            class="has-text-link"
+          >
+            {{ category_product.name }}
+          </a>
+        </p>
+
+        <p class="is-size-5 mb-4">{{ product.description }}</p>
+
+        <p class="is-size-4 has-text-weight-semibold mb-3">
+          💵 {{ "%.2f"|format(product.price) }} Bs.
+        </p>
+
+        {% if product.stock > 0 %}
+        <p class="has-text-success mb-4">
+          <i class="fas fa-check-circle mr-1"></i> En stock: {{ product.stock }}
+        </p>
+        <form action="" method="POST">
+          <input type="hidden" name="product_id" value="{{ product._id }}" />
+          <button class="button is-primary is-medium">
+            <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito
+          </button>
+        </form>
+        {% else %}
+        <p class="has-text-danger">
+          <i class="fas fa-times-circle mr-1"></i> Producto agotado
+        </p>
+        {% endif %}
+
+        <hr />
+
+        <p class="is-size-7 has-text-grey">
+          Publicado: {{ product.created_at.strftime("%d/%m/%Y") }}<br />
+          Última actualización: {{ product.updated_at.strftime("%d/%m/%Y") }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -88,7 +88,10 @@ class Product:
                 category_id=category._id,
             )
 
-            mongo.db.products.insert_one(product.to_dict())
+            result = mongo.db.products.insert_one(product.to_dict())
+            Category.add_product(
+                category_id=category._id, product_id=result.inserted_id
+            )
 
             return "Producto creado correctamente", "success"
 
@@ -99,6 +102,18 @@ class Product:
     def find_by_id(id):
         try:
             product = mongo.db.products.find_one({"_id": ObjectId(id)})
+
+            if product:
+                return Product.from_dict(product), None, "success"
+
+            return None, "Producto no encontrado", "danger"
+        except Exception as e:
+            return None, f"Error al buscar producto: {e}", "danger"
+
+    @staticmethod
+    def find_by_slug(slug):
+        try:
+            product = mongo.db.products.find_one({"slug": slug})
 
             if product:
                 return Product.from_dict(product), None, "success"
