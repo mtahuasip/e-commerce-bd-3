@@ -6,6 +6,7 @@ from .extensions import mongo, redis
 from .config import Config
 from .init_indexes import create_indexes
 from .models.user import User
+from app.models.cart import Cart
 
 
 def create_app():
@@ -43,5 +44,16 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(account)
     app.register_blueprint(cart)
+
+    @app.context_processor
+    def inject_cart_count():
+        from flask_login import current_user
+
+        if current_user.is_authenticated:
+            cart, _, _ = Cart.find_cart_by_user_id(current_user.id)
+            if cart:
+                count = sum(item["quantity"] for item in cart.products)
+                return {"cart_count": count}
+        return {"cart_count": 0}
 
     return app

@@ -42,7 +42,6 @@
     </div>
 
     <div class="navbar-end">
-      {% if current_user.is_authenticated %}
       <div class="navbar-item">
         <a class="button is-warning" href="{{ url_for('cart.my_cart') }}">
           <i class="fas fa-shopping-cart mr-1"></i> Carrito
@@ -50,11 +49,11 @@
             id="cart-count"
             class="tag is-danger is-rounded is-small cart-badge"
           >
-            0
+            {{ cart_count }}
           </span>
         </a>
       </div>
-      {% endif %} {% if not current_user.is_authenticated %}
+      {% if not current_user.is_authenticated %}
       <div class="navbar-item">
         <a class="button is-light" href="{{ url_for('auth.login') }}">
           <i class="fas fa-sign-in-alt mr-1"></i> Iniciar sesión
