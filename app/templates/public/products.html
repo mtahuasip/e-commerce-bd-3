@@ -63,7 +63,11 @@ block head %} {{ super() }} {% endblock %} {% block content %}
             </a>
 
             {% if product.stock > 0 %}
-            <form action="" method="POST" class="card-footer-item">
+            <form
+              action="{{ url_for('cart.add_product_to_cart') }}"
+              method="POST"
+              class="card-footer-item"
+            >
               <input
                 type="hidden"
                 name="product_id"

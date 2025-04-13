@@ -99,7 +99,7 @@ class User(UserMixin):
         try:
             user = mongo.db.users.find_one({"_id": ObjectId(id)})
             if user:
-                return User.from_dict(user, True), None, "success"
+                return User.from_dict(user), None, "success"
 
             return None, "Usuario no encontrado", "danger"
         except Exception as e:

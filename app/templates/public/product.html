@@ -36,7 +36,7 @@ endblock %} {% block head %} {{ super() }} {% endblock %} {% block content %}
         <p class="has-text-success mb-4">
           <i class="fas fa-check-circle mr-1"></i> En stock: {{ product.stock }}
         </p>
-        <form action="" method="POST">
+        <form action="{{ url_for('cart.add_product_to_cart') }}" method="POST">
           <input type="hidden" name="product_id" value="{{ product._id }}" />
           <button class="button is-primary is-medium">
             <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito

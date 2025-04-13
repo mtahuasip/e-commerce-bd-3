@@ -7,6 +7,7 @@ account = Blueprint("account", __name__)
 
 @account.route("/orders", methods=["GET"])
 def orders():
+
     return render_template(
         "account/orders.html", show_sidebar=False, active_page="orders"
     )
@@ -14,6 +15,7 @@ def orders():
 
 @account.route("/purchases", methods=["GET"])
 def purchases():
+
     return render_template(
         "account/purchases.html", show_sidebar=False, active_page="purchases"
     )
