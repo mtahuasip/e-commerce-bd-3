@@ -73,6 +73,7 @@ block head %} {{ super() }} {% endblock %} {% block content %}
                 name="product_id"
                 value="{{ product._id }}"
               />
+              <input type="hidden" name="quantity" value="1" />
               <button class="has-text-primary">
                 <span class="icon"><i class="fas fa-cart-plus"></i></span>
                 <span>Agregar</span>

@@ -17,7 +17,7 @@ def add_product_to_cart():
         cart = Cart.create_cart(user_id=current_user.id)
 
     message, category = Cart.add_product(
-        cart_id=cart._id, product_id=product_id, quantity=quantity
+        cart_id=cart._id, product_id=product_id, quantity=int(quantity)
     )
 
     if category == "success":
