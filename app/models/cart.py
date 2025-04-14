@@ -119,3 +119,12 @@ class Cart:
     def _recalculate_total(self):
         self.total = sum(item["subtotal"] for item in self.products)
         self.updated_at = datetime.now(timezone.utc)
+
+    @staticmethod
+    def delete_cart_by_user_id(user_id):
+        result = mongo.db.carts.delete_one({"user_id": ObjectId(user_id)})
+
+        if result.deleted_count > 0:
+            return "Carrito eliminado correctamente", "success"
+
+        return "Carrito no encontrado", "danger"

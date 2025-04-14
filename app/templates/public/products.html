@@ -32,11 +32,11 @@ block head %} {{ super() }} {% endblock %} {% block content %}
               </span>
               {% endif %} {% if product.stock == 0 %}
               <span class="tag is-danger is-light has-text-weight-semibold">
-                <i class="fas fa-times-circle mr-1"></i> Stock
+                <i class="fas fa-times-circle mr-1"></i> Agotado
               </span>
               {% else %}
               <span class="tag is-success is-light has-text-weight-semibold">
-                <i class="fas fa-check-circle mr-1"></i> Agotado
+                <i class="fas fa-check-circle mr-1"></i> Stock
               </span>
               {% endif %}
             </div>

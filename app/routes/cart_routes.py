@@ -22,7 +22,7 @@ def add_product_to_cart():
 
     redis.hset(key, product_id, new_qty)
 
-    redis.expire(key, 5000)
+    redis.expire(key, 30)
 
     cart, _, _ = Cart.find_cart_by_user_id(current_user.id)
 
@@ -48,5 +48,15 @@ def my_cart():
     if category == "error":
         flash(message, category)
         return redirect("/products")
+
+    if cart:
+        key = f"cart:{current_user.id}"
+        for item in cart.products:
+            product_id = item["product"]["_id"]
+            current_prod = redis.hget(key, str(product_id))
+
+            if not current_prod:
+                _, _ = Cart.delete_cart_by_user_id(current_user.id)
+                cart = None
 
     return render_template("cart/my_cart.html", show_sidebar=False, cart=cart)
