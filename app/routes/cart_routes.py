@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, request, flash
 from flask_login import login_required, current_user
 from app.models.cart import Cart
 from app.extensions import redis
+from app.config import Config
 
 cart = Blueprint("cart", __name__)
 
@@ -22,7 +23,7 @@ def add_product_to_cart():
 
     redis.hset(key, product_id, new_qty)
 
-    redis.expire(key, 30)
+    redis.expire(key, Config.CART_DURATION)
 
     cart, _, _ = Cart.find_cart_by_user_id(current_user.id)
 
